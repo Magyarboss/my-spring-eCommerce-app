@@ -1,12 +1,12 @@
 package com.myspringecommerceapp.modelDTO;
 
-import com.myspringecommerceapp.model.Subcategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -17,7 +17,7 @@ public class CategoryDTO {
     private Long id;
     @NotBlank
     private String name;
-    @Nullable
-    private Set<SubcategoryDTO> subcategoryDTO;
+//    @Nullable
+    private Set<SubcategoryDTO> subcategoriesDTO = new HashSet<>();
 
 }

@@ -15,9 +15,8 @@ import javax.validation.constraints.Null;
 public class SubcategoryDTO {
 
     private Long id;
+    private Long categoryId;
     @NotBlank
     private String name;
-    @NotBlank
-    private CategoryDTO categoryDTO;
 
 }

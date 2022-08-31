@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,4 +22,9 @@ public class Subcategory extends BaseEntity{
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Subcategory(Long id, String name, Category category) {
+        super(id);
+        this.name = name;
+        this.category = category;
+    }
 }

@@ -16,12 +16,20 @@ public class Category extends BaseEntity {
 
     private String name;
     @OneToMany(mappedBy = "category")
-    private Set<Subcategory> subcategory;
+    private Set<Subcategory> subcategories;
 
     @Builder
-    public Category(Long id, String name, Set<Subcategory> subcategory) {
+    public Category(Long id, String name, Set<Subcategory> subcategories) {
         super(id);
         this.name = name;
-        this.subcategory = subcategory;
+        this.subcategories = subcategories;
+    }
+
+
+
+    public Category addSubcategory(Subcategory subcategory){
+        subcategory.setCategory(this);
+        this.subcategories.add(subcategory);
+        return this;
     }
 }
