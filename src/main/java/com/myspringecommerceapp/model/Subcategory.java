@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Setter
@@ -19,7 +20,7 @@ public class Subcategory extends BaseEntity{
 
     private String name;
     @ManyToOne
-    @Column(name = "category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }

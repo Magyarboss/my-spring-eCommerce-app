@@ -2,11 +2,8 @@ package com.myspringecommerceapp.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Lob;
-import javax.validation.constraints.Email;
+import javax.persistence.*;
+
 
 @Setter
 @Getter
@@ -14,6 +11,7 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "users")  //izbacuje error ako se tablica zove "user" iz nekog razloga
 public class User extends Person{
 
     private String username;
