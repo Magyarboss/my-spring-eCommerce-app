@@ -21,7 +21,7 @@ public class ProductDTO {
     @NotNull
     private Double price;
     private Byte[] image;
-    private CategoryDTO categoryDTO;
-    private SubcategoryDTO subcategoryDTO;
+    private Long categoryId;
+    private Long subcategoryId;
 
 }

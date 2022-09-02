@@ -10,8 +10,8 @@ public class testController {
 
     @RequestMapping("/index")
     public String testHome(Model model){
-        model.addAttribute("testMessage", "Hello from test controler");
-        return "index";
+        model.addAttribute("testMessage", "Hello from test controller");
+        return "test";
     }
 
 }

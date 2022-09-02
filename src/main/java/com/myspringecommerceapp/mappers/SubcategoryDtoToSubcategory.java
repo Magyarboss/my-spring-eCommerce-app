@@ -14,7 +14,7 @@ public class SubcategoryDtoToSubcategory implements Converter<SubcategoryDTO, Su
             return null;
         }
 
-        Subcategory subcategory = new Subcategory();
+        final Subcategory subcategory = new Subcategory();
         subcategory.setId(source.getId());
         subcategory.setName(source.getName());
 

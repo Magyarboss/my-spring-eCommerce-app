@@ -16,6 +16,7 @@ public class SubcategoryDTO {
 
     private Long id;
     private Long categoryId;
+//    private CategoryDTO categoryDTO;        //zasto ne ide ovako?
     @NotBlank
     private String name;
 

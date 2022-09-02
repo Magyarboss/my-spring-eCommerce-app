@@ -3,6 +3,7 @@ package com.myspringecommerceapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Setter
@@ -21,6 +22,12 @@ public class User extends Person{
     private Byte[] image;
     @Enumerated(value = EnumType.STRING)
     private UserType userType;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Bill> bill;
+
 
     @Builder
     public User(Long id, String firstName, String lastName, String username
