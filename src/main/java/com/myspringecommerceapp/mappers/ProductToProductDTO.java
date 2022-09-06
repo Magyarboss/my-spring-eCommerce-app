@@ -3,7 +3,9 @@ package com.myspringecommerceapp.mappers;
 import com.myspringecommerceapp.model.Product;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductToProductDTO implements Converter<Product, ProductDTO> {
 
     @Override

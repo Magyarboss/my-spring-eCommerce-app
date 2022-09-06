@@ -6,7 +6,9 @@ import com.myspringecommerceapp.model.Subcategory;
 import com.myspringecommerceapp.modelDTO.CategoryDTO;
 import com.myspringecommerceapp.modelDTO.SubcategoryDTO;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryDtoToCategory implements Converter<CategoryDTO, Category> {
 
     private final SubcategoryDtoToSubcategory subcategoryDtoToSubcategory;

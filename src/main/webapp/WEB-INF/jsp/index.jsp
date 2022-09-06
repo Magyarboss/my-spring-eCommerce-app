@@ -1,4 +1,4 @@
-<%@page import="modeli.*"%>
+<%@page import="com.myspringecommerceapp.model.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -6,16 +6,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%--    <c:url value="/resources/" var="headercss" />--%>
+<%--    <c:url value="/resources/css/sidebar-nav-submenu.css" var="sidebarcss" />--%>
+<%--    <c:url value="/resources/javascript/sidebar-nav-submenu.js" var="sideebarjs" />--%>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="./css/headers.css" rel="stylesheet">
-    <script src="./javascript/sidebar-nav-submenu.js"></script>
-    <link rel="stylesheet" href="./css/sidebar-nav-submenu.css">
+    <link href="/resources/css/headers.css" rel="stylesheet" >
+    <script src="/resources/javascript/sidebar-nav-submenu.js" ></script>
+    <link rel="stylesheet" href="/resources/css/sidebar-nav-submenu.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>IT Accessories</title>
+<%--    <c:set var="cat" value="${category}"/>--%>
+<%--    <c:set var="subCat" value="${subcategory}"/>--%>
 
 </head>
 
@@ -105,9 +111,9 @@
 <section class="py-3 mb-4 border-bottom">
     <div class="d-flex align-content-center">
         <div class="me-auto ms-5 p-2"><h2 class="me-auto mb-3 mb-lg-0 text-dark text-decoration-none">
-            <c:if test="${idkat==-1}"> &#62; Svi proizvodi </c:if>
-            <c:if test="${idkat!=-1 && idpotkat!=null && idpotkat!=-1}"> &#62; ${kategorije.get(idkat-1).naziv} &#62; ${potkategorije.get(idpotkat-1).naziv} </c:if>
-            <c:if test="${idkat!=-1 && idkat!=0 && (idpotkat==null || idpotkat==-1) }"> &#62; ${kategorije.get(idkat-1).naziv} </c:if>
+            <c:if test="${categoryId==null}"> &#62; Svi proizvodi </c:if>
+            <c:if test="${categoryId!=null && subcategoryId!=null && idpotkat!=-1}"> &#62; ${categoryAtr.name} &#62; ${subcategory.name}  </c:if>
+            <c:if test="${categoryId!=-1 && categoryId!=0 && (subcategoryId==null || subcategoryId==-1) }"> &#62; ${categoryAtr.name} </c:if>
         </h2>
         </div>
 
@@ -133,107 +139,129 @@
                 <nav class="sidebar card py-2 mb-4">
                     <ul class="nav flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link" href="IndexServlet" <c:if test="${idkat==-1}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Svi  proizvodi </a>
+                            <a class="nav-link" href="/" <c:if test="${categoryId==null}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Svi  proizvodi </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(0).id}" <c:if test="${idkat==1}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Monitori </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}" <c:if test="${idkat==2}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Periferija <b class="float-end">&#10095;</b> </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(0).potkategorijaID}">Tipkovnice </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(1).potkategorijaID}">Miševi </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(2).potkategorijaID}">Podloge za miš </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(3).potkategorijaID}">Zvučnici </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(4).potkategorijaID}">Slušalice </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(5).potkategorijaID}">Mikrofoni </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(6).potkategorijaID}">Web kamere </a></li>
+
+
+
+
+                        <c:forEach var="category" items="${categories}">
+                        <c:if test="${category.subcategories.size() <= 0}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category/${category.id}" <c:if test="${categoryId==category.id}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> ${category.name} </a>
+                            </li>
+                        </c:if>
+                        <c:if test="${category.subcategories.size()>0}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category/${category.id}" <c:if test="${categoryId==category.id}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > ${category.name} <b class="float-end">&#10095;</b> </a>
+                                <ul class="submenu dropdown-menu">
+                            <c:forEach var="subcategory" items="${category.subcategories}">
+                                <li><a class="nav-link" href="/category/${category.id}/subcategory/${subcategory.id}"> ${subcategory.name} </a></li>
+                            </c:forEach>
                             </ul>
-                        </li>
+                            </li>
+                        </c:if>
+                        </c:forEach>
                         <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(2).id}" <c:if test="${idkat==3}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Kućišta </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(3).id}" <c:if test="${idkat==4}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Grafičke kartice </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(4).id}" <c:if test="${idkat==5}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Procesori </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(5).id}" <c:if test="${idkat==6}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Matične ploče </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(6).id}" <c:if test="${idkat==7}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Napajanja </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}" <c:if test="${idkat==8}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Memorija <b class="float-end">&#10095;</b> </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(7).potkategorijaID}">Tvrdi diskovi (HDD) </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(8).potkategorijaID}">Solid state diskovi (SSD) </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(9).potkategorijaID}">Radna memorija (RAM) </a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}" <c:if test="${idkat==9}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Hlađenje <b class="float-end">&#10095;</b> </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(10).potkategorijaID}">Ventilatori </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(11).potkategorijaID}">Hladnjaci </a></li>
-                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(12).potkategorijaID}">Vodeno hlađenje </a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="IndexServlet?idkat=0" <c:if test="${idkat==0}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Ostalo </a>
+                            <a class="nav-link" href="category/null" <c:if test="${idkat==0}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Ostalo </a>
                         </li>
                     </ul>
                 </nav>
             </div>
+
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="category/1" data-url="category/1" <c:if test="${cat.id==1}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Monitori </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}" <c:if test="${idkat==2}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Periferija <b class="float-end">&#10095;</b> </a>--%>
+<%--                            <ul class="submenu dropdown-menu">--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(0).potkategorijaID}">Tipkovnice </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(1).potkategorijaID}">Miševi </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(2).potkategorijaID}">Podloge za miš </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(3).potkategorijaID}">Zvučnici </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(4).potkategorijaID}">Slušalice </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(5).potkategorijaID}">Mikrofoni </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(1).id}&idpotkat=${potkategorije.get(6).potkategorijaID}">Web kamere </a></li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(2).id}" <c:if test="${idkat==3}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Kućišta </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(3).id}" <c:if test="${idkat==4}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Grafičke kartice </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(4).id}" <c:if test="${idkat==5}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Procesori </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(5).id}" <c:if test="${idkat==6}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Matične ploče </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(6).id}" <c:if test="${idkat==7}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Napajanja </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}" <c:if test="${idkat==8}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Memorija <b class="float-end">&#10095;</b> </a>--%>
+<%--                            <ul class="submenu dropdown-menu">--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(7).potkategorijaID}">Tvrdi diskovi (HDD) </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(8).potkategorijaID}">Solid state diskovi (SSD) </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(7).id}&idpotkat=${potkategorije.get(9).potkategorijaID}">Radna memorija (RAM) </a></li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}" <c:if test="${idkat==9}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Hlađenje <b class="float-end">&#10095;</b> </a>--%>
+<%--                            <ul class="submenu dropdown-menu">--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(10).potkategorijaID}">Ventilatori </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(11).potkategorijaID}">Hladnjaci </a></li>--%>
+<%--                                <li><a class="nav-link" href="IndexServlet?idkat=${kategorije.get(8).id}&idpotkat=${potkategorije.get(12).potkategorijaID}">Vodeno hlađenje </a></li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="IndexServlet?idkat=0" <c:if test="${idkat==0}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>> Ostalo </a>--%>
+<%--                        </li>--%>
+
+
             <!-- ============= COMPONENT END// ============== -->
 
 
             <div class="col-9">
                 <div class="row justify-content-center">
 
-                    <c:forEach var="p" items="${proizvodi}">
+                    <c:forEach var="p" items="${products}">
                         <div class="col-auto">
-
-
                             <div class="card m-3" style="width: 20rem;height: 35rem">
 
-                                <c:if test="${p.slika==null}">
-                                    <img src="./slike/slikeproizvoda/no_image.png" class="card-img-top"  height="300" alt="...">
+                                <c:if test="${p.image==null}">
+                                    <img src="/resources/images/product-images/no_image.png" class="card-img-top"  height="300" alt="...">
                                 </c:if>
-                                <c:if test="${p.slika!=null}">
-                                    <img src="./slike/slikeproizvoda/${p.slika}" class="card-img-top"  height="300" alt="...">
+                                <c:if test="${p.image!=null}">
+                                    <img src="/resources/images/product-images/${p.image}" class="card-img-top"  height="300" alt="...">
                                 </c:if>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">${p.naziv}</h5>
-                                    <p class="card-text">${p.opis}</p>
-                                    <h5 class="card-title"><fmt:formatNumber value="${p.cijena}" minFractionDigits="2" maxFractionDigits="2" />Kn</h5>
+                                    <h5 class="card-title">${p.name}</h5>
+                                    <p class="card-text">${p.description}</p>
+                                    <h5 class="card-title"><fmt:formatNumber value="${p.price}" minFractionDigits="2" maxFractionDigits="2" />Kn</h5>
                                     <form action="DodajUKosaricuServlet" method="post">
-                                        <input type="hidden" name="id" value="${p.IDProizvod}" />
-                                        <input type="hidden" name="naziv" value="${p.naziv}" />
-                                        <input type="hidden" name="opis" value="${p.opis}" />
-                                        <input type="hidden" name="cijena" value="${p.cijena}" />
-                                        <input type="hidden" name="kolicinaNaSkladistu" value="${p.kolicinaNaSkladistu}" />
+                                        <input type="hidden" name="id" value="${p.id}" />
+                                        <input type="hidden" name="naziv" value="${p.name}" />
+                                        <input type="hidden" name="opis" value="${p.description}" />
+                                        <input type="hidden" name="cijena" value="${p.price}" />
+                                        <input type="hidden" name="kolicinaNaSkladistu" value="${p.quantityInStock}" />
                                         <div class="d-flex align-content-center">
                                             <input class="me-3" type="number" value="1"
-                                                   min="1" max="${p.kolicinaNaSkladistu}" step="1"
+                                                   min="1" max="${p.quantityInStock}" step="1"
                                                    name="kolicina" />
                                             <input type="submit" class="btn btn-primary" value="Dodaj u košaricu"/>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-
-
                         </div>
                     </c:forEach>
-
-
                 </div>
             </div>
         </div>
+    </div>
 </main>
 <!-- ============= COMPONENT END// ============== -->
 

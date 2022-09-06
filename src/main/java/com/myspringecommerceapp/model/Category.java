@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -16,10 +17,10 @@ public class Category extends BaseEntity {
 
     private String name;
     @OneToMany(mappedBy = "category")
-    private Set<Subcategory> subcategories;
+    private List<Subcategory> subcategories;
 
     @Builder
-    public Category(Long id, String name, Set<Subcategory> subcategories) {
+    public Category(Long id, String name, List<Subcategory> subcategories) {
         super(id);
         this.name = name;
         this.subcategories = subcategories;

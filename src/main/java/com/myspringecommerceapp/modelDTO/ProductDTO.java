@@ -3,6 +3,7 @@ package com.myspringecommerceapp.modelDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class ProductDTO {
 
     private Long id;
@@ -20,7 +22,8 @@ public class ProductDTO {
     private int quantityInStock;
     @NotNull
     private Double price;
-    private Byte[] image;
+//    private Byte[] image; TODO put it back to byte[]
+    private String image;
     private Long categoryId;
     private Long subcategoryId;
 

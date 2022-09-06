@@ -3,10 +3,7 @@ package com.myspringecommerceapp.model;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -21,7 +18,8 @@ public class Product extends BaseEntity{
     private int quantityInStock;
     private Double price;
     @Lob
-    private Byte[] image;
+    private String image;
+//    private Byte[] image;  TODO put it back to byte[]
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -29,10 +27,14 @@ public class Product extends BaseEntity{
     @JoinColumn(name = "subcategory_id")
     @Nullable
     private Subcategory subcategory;
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private ProductInShoppingCart productInShoppingCart;
 
     @Builder
-    public Product(Long id, String name, String description, int quantityInStock
-                        , Double price, Byte[] image, Category category, Subcategory subcategory) {
+
+    public Product(Long id, String name, String description, int quantityInStock, Double price,
+                   String image, Category category, @Nullable Subcategory subcategory,
+                   ProductInShoppingCart productInShoppingCart) {
         super(id);
         this.name = name;
         this.description = description;
@@ -41,5 +43,6 @@ public class Product extends BaseEntity{
         this.image = image;
         this.category = category;
         this.subcategory = subcategory;
+        this.productInShoppingCart = productInShoppingCart;
     }
 }

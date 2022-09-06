@@ -3,7 +3,9 @@ package com.myspringecommerceapp.mappers;
 import com.myspringecommerceapp.model.Category;
 import com.myspringecommerceapp.modelDTO.CategoryDTO;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryToCategoryDTO implements Converter<Category, CategoryDTO> {
 
     private final SubcategoryToSubcategoryDTO subcategoryToSubcategoryDTO;

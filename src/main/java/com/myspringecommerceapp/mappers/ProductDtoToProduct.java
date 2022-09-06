@@ -5,7 +5,9 @@ import com.myspringecommerceapp.model.Product;
 import com.myspringecommerceapp.model.Subcategory;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductDtoToProduct implements Converter<ProductDTO, Product> {
 
     @Override
