@@ -21,7 +21,7 @@ public class UserDTO {
     private String lastName;
     @NotBlank
     private String username;
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")       // at least 4 char, 1 lowercase 1 uppercase 1 number
     private String password;
     @Email
     private String email;

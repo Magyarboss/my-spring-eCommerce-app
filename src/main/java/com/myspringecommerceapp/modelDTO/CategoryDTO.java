@@ -6,7 +6,9 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -18,6 +20,6 @@ public class CategoryDTO {
     @NotBlank
     private String name;
 //    @Nullable
-    private Set<SubcategoryDTO> subcategoriesDTO = new HashSet<>();
+    private List<SubcategoryDTO> subcategoriesDTO = new ArrayList<>();
 
 }

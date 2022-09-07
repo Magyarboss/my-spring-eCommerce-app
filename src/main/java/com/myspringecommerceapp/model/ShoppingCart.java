@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -20,6 +21,6 @@ public class ShoppingCart extends BaseEntity{
     @OneToOne
     private User user;
     @OneToMany(mappedBy = "shoppingCart")
-    private Set<ProductInShoppingCart> productInShoppingCartList;
+    private List<ProductInShoppingCart> productInShoppingCartList;
 
 }

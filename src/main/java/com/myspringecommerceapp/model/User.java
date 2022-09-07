@@ -3,6 +3,7 @@ package com.myspringecommerceapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -26,17 +27,19 @@ public class User extends Person{
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Bill> bill;
+    private List<Bill> bill;
 
 
     @Builder
-    public User(Long id, String firstName, String lastName, String username
-            , String password, String email, Byte[] image, UserType userType) {
+
+    public User(Long id, String firstName, String lastName, String username, String password, String email, Byte[] image, UserType userType, ShoppingCart shoppingCart, List<Bill> bill) {
         super(id, firstName, lastName);
         this.username = username;
         this.password = password;
         this.email = email;
         this.image = image;
         this.userType = userType;
+        this.shoppingCart = shoppingCart;
+        this.bill = bill;
     }
 }
