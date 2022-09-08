@@ -33,7 +33,7 @@
     <div  class="container-fluid">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="IndexServlet" class="nav-link px-2 text-white">Početna</a></li>
+                <li><a href="/" class="nav-link px-2 text-white">Početna</a></li>
                 <li><a href="cestapitanja.jsp" class="nav-link px-2 text-white">Česta pitanja</a></li>
                 <li><a href="kontakt.jsp" class="nav-link px-2 text-white">Kontakt</a></li>
                 <li><a href="Onama.jsp" class="nav-link px-2 text-white">O nama</a></li>
@@ -96,7 +96,7 @@
 
 <header class="p-3 bg-dark text-white">
     <div class="container-fluid d-flex justify-content-sm-center justify-content-lg-start align-content-lg-center mb-lg-0 ">
-        <a href="IndexServlet"  class="text-dark text-decoration-none">
+        <a href="/"  class="text-dark text-decoration-none">
             <h1  style="color:white;"><b><i> Razor Sharp Technologies </i> Inc.</b> </h1>
         </a>
     </div>
@@ -110,21 +110,21 @@
 
 <section class="py-3 mb-4 border-bottom">
     <div class="d-flex align-content-center">
-        <div class="me-auto ms-5 p-2"><h2 class="me-auto mb-3 mb-lg-0 text-dark text-decoration-none">
-            <c:if test="${categoryId==null}"> &#62; Svi proizvodi </c:if>
-            <c:if test="${categoryId!=null && subcategoryId!=null && idpotkat!=-1}"> &#62; ${categoryAtr.name} &#62; ${subcategory.name}  </c:if>
-            <c:if test="${categoryId!=-1 && categoryId!=0 && (subcategoryId==null || subcategoryId==-1) }"> &#62; ${categoryAtr.name} </c:if>
-        </h2>
+        <div class="me-auto ms-5 p-2">
+            <h2 class="me-auto mb-3 mb-lg-0 text-dark text-decoration-none">
+                <c:if test="${categoryId==null}"> &#62; Svi proizvodi </c:if>
+                <c:if test="${categoryId!=null && subcategoryId!=null}"> &#62; ${categoryAtr.name} &#62; ${subcategory.name}  </c:if>
+                <c:if test="${categoryId!=0 && (subcategoryId==null || subcategoryId==-1) }"> &#62; ${categoryAtr.name} </c:if>
+            </h2>
         </div>
 
         <div class="p-2 me-3">
             <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Sortiraj po:</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><a class="dropdown-item" href="IndexServlet?idkat=${idkat}&idpotkat=${idpotkat}" <c:if test="${orderBy==-1}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>>Nazivu: A do Z</a></li>
-                <li><a class="dropdown-item" href="IndexServlet?idkat=${idkat}&idpotkat=${idpotkat}&orderBy=1" <c:if test="${orderBy==1}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>>Nazivu: Z do A</a></li>
-                <li><a class="dropdown-item" href="IndexServlet?idkat=${idkat}&idpotkat=${idpotkat}&orderBy=2" <c:if test="${orderBy==2}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>>Cijena: manja prema većoj</a></li>
-                <li><a class="dropdown-item" href="IndexServlet?idkat=${idkat}&idpotkat=${idpotkat}&orderBy=3" <c:if test="${orderBy==3}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if>>Cijena: veća prema manjoj</a></li>
-
+                <li><a class="dropdown-item" href="?orderBy=nameASC" <c:if test="${orderBy=='nameASC'}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Nazivu: A do Z </a></li>
+                <li><a class="dropdown-item" href="?orderBy=nameDESC" <c:if test="${orderBy=='nameDESC'}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Nazivu: Z do A </a></li>
+                <li><a class="dropdown-item" href="?orderBy=priceASC" <c:if test="${orderBy=='priceASC'}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Cijena: manja prema većoj </a></li>
+                <li><a class="dropdown-item" href="?orderBy=priceDESC" <c:if test="${orderBy=='priceDESC'}"> style="color:var(--bs-primary);background: var(--bs-light);"</c:if> > Cijena: veća prema manjoj </a></li>
             </ul>
         </div>
 

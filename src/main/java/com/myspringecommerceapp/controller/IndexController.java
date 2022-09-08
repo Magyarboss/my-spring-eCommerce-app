@@ -1,6 +1,7 @@
 package com.myspringecommerceapp.controller;
 
 import com.myspringecommerceapp.exceptions.NotFoundException;
+import com.myspringecommerceapp.modelDTO.ProductDTO;
 import com.myspringecommerceapp.repositories.SubcategoryRepository;
 import com.myspringecommerceapp.services.CategoryService;
 import com.myspringecommerceapp.services.ProductService;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -28,33 +31,39 @@ public class IndexController {
     }
 
     @GetMapping
-    public String getIndexPage(Model model){
+    public String getIndexPage(Model model, @RequestParam(defaultValue = "nameASC") String orderBy){
 
-        model.addAttribute("categories",categoryService.getCategories() );
-        model.addAttribute("products",productService.getProducts());
+        List<ProductDTO> productDTOList = productService.getProducts();
+
+        // ---- Sortirana lista proizvoda ----
+        productDTOList = productService.sortProductDTOListBy(productDTOList, orderBy);
+
+        model.addAttribute("orderBy", orderBy);
+        model.addAttribute("categories", categoryService.getCategories() );
+        model.addAttribute("products", productDTOList);
         return "index";
     }
 
-    @RequestMapping("/category/{categoryId}")
-    public String getCategoryProducts(@PathVariable Long categoryId, Model model){
 
-        model.addAttribute("categories",categoryService.getCategories());
-        model.addAttribute("products", productService.findByCategoryId(categoryId));
-        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
-
-        return "index";
-    }
-
-    @RequestMapping("/category/{categoryId}/subcategory/{subcategoryId}")
-    public String getSubcategoryProducts(@PathVariable Long categoryId, @PathVariable Long subcategoryId, Model model){
-
-        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
-        model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
-        model.addAttribute("categories",categoryService.getCategories());
-        model.addAttribute("products", productService.findBySubcategoryId(subcategoryId));
-
-        return "index";
-    }
+//    @RequestMapping("/category/{categoryId}/subcategory/{subcategoryId}/{orderBy}")
+//    public String getProductsOrderBy(@PathVariable Long categoryId, @PathVariable Long subcategoryId, Model model, @PathVariable String orderBy){
+//
+//        List<ProductDTO> productDTOList = new ArrayList<>();
+//
+//        if(orderBy.equals("ASC")){
+//            productDTOList = productService.findByCategoryIdAndSubcategoryIdOrderByNameAsc(categoryId, subcategoryId);
+//        }else if(orderBy.equals("DESC")){
+//            productDTOList = productService.findByCategoryIdAndSubcategoryIdOrderByNameDesc(categoryId, subcategoryId);
+//        }
+//
+//        model.addAttribute("subcategoryAtr", subcategoryService.findById(subcategoryId));
+//        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
+//        model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
+//        model.addAttribute("categories",categoryService.getCategories());
+//        model.addAttribute("products", productDTOList);
+//
+//        return "index";
+//    }
 
 
 

@@ -18,4 +18,25 @@ public interface ProductService {
 
     List<ProductDTO> findBySubcategoryId(Long l);
 
+    // ----- SORTIRANJE PREKO LIST.SORT() -----
+
+    List<ProductDTO> sortProductDTOListByNameASC(List<ProductDTO> productDTOList);
+
+    List<ProductDTO> sortProductDTOListByNameDESC(List<ProductDTO> productDTOList);
+
+    List<ProductDTO> sortProductDTOListByPriceASC(List<ProductDTO> productDTOList);
+
+    List<ProductDTO> sortProductDTOListByPriceDESC(List<ProductDTO> productDTOList);
+
+    List<ProductDTO> sortProductDTOListBy(List<ProductDTO> productDTOList, String orderBy);
+
+    // ----- SORTIRANJE PREKO BAZE -----
+
+//    List<ProductDTO> findByCategoryIdAndSubcategoryIdOrderByNameAsc(Long categoryId, Long subcategoryId);
+//
+//    List<ProductDTO> findByCategoryIdAndSubcategoryIdOrderByNameDesc(Long categoryId, Long subcategoryId);
+//
+//    List<ProductDTO> findByCategoryIdAndSubcategoryIdOrderByPrice(Long categoryId, Long subcategoryId);
+//
+//    List<ProductDTO> findByCategoryIdAndSubcategoryIdOrderByPriceDesc(Long categoryId, Long subcategoryId);
 }

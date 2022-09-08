@@ -1,6 +1,5 @@
 package com.myspringecommerceapp.controller;
 
-
 import com.myspringecommerceapp.exceptions.NotFoundException;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
 import com.myspringecommerceapp.services.CategoryService;
@@ -13,48 +12,44 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping({"/category"})
-public class CategoryController {
+@RequestMapping("/category/{categoryId}/subcategory")
+public class SubcategoryController {
+
 
     private final CategoryService categoryService;
     private final ProductService productService;
     private final SubcategoryService subcategoryService;
 
-    public CategoryController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService) {
+    public SubcategoryController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.subcategoryService = subcategoryService;
     }
 
-    @RequestMapping("/{categoryId}")
-    public String getCategoryProducts(@PathVariable Long categoryId, Model model, @RequestParam(defaultValue = "nameASC") String orderBy){
 
-        List<ProductDTO> productDTOList = productService.findByCategoryId(categoryId);
+    @RequestMapping("/{subcategoryId}")
+    public String getSubcategoryProducts(@PathVariable Long categoryId, @PathVariable Long subcategoryId, Model model
+                                                , @RequestParam(defaultValue = "nameASC") String orderBy){
+
+        List<ProductDTO> productDTOList = productService.findBySubcategoryId(subcategoryId);
 
         // ---- Sortirana lista proizvoda ----
         productDTOList = productService.sortProductDTOListBy(productDTOList, orderBy);
 
         model.addAttribute("orderBy", orderBy);
+        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
+        model.addAttribute("subcategoryAtr", subcategoryService.findById(subcategoryId));
+        model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
         model.addAttribute("categories",categoryService.getCategories());
         model.addAttribute("products", productDTOList);
-        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
+
 
         return "index";
     }
-//    @RequestMapping("/{orderBy}")
-//    public String sortBy(@PathVariable String orderBy, Model model){
-//
-//        model.addAttribute("categories",categoryService.getCategories());
-////        model.addAttribute("products", productService.findByCategoryId(categoryId));
-////        model.addAttribute("categoryAtr", categoryService.findById(categoryId));
-//
-//        return "redirect:/category/{categoryId}";
-//    }
 
 
 
