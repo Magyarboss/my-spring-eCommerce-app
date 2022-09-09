@@ -4,12 +4,16 @@ import com.myspringecommerceapp.model.Category;
 import com.myspringecommerceapp.model.Product;
 import com.myspringecommerceapp.model.Subcategory;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductDtoToProduct implements Converter<ProductDTO, Product> {
 
+    @Synchronized
+    @Nullable
     @Override
     public Product convert(ProductDTO source) {
         if(source == null) return null;

@@ -2,12 +2,17 @@ package com.myspringecommerceapp.mappers;
 
 import com.myspringecommerceapp.model.Product;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductToProductDTO implements Converter<Product, ProductDTO> {
 
+
+    @Synchronized
+    @Nullable
     @Override
     public ProductDTO convert(Product source) {
         if(source == null) return null;

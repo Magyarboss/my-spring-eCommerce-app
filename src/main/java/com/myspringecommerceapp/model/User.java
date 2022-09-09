@@ -27,7 +27,7 @@ public class User extends Person{
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Bill> bill;
+    private List<Bill> bills;
 
 
     @Builder

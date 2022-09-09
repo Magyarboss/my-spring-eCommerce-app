@@ -75,7 +75,7 @@
             </c:if>
             <div class="text-end mx-2">
                 <c:if test="${loggedUser==null}" >
-                    <a href="LoginServlet" class="btn btn btn-success me-2">Prijava</a>
+                    <a href="/login" class="btn btn btn-success me-2">Prijava</a>
                     <a href="RegisterServlet" class="btn btn-success me-2">Registracija</a>
                 </c:if>
 

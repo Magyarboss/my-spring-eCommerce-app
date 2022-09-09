@@ -5,7 +5,9 @@ import com.myspringecommerceapp.model.Category;
 import com.myspringecommerceapp.model.Subcategory;
 import com.myspringecommerceapp.modelDTO.CategoryDTO;
 import com.myspringecommerceapp.modelDTO.SubcategoryDTO;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +19,8 @@ public class CategoryDtoToCategory implements Converter<CategoryDTO, Category> {
         this.subcategoryDtoToSubcategory = subcategoryDtoToSubcategory;
     }
 
+    @Synchronized
+    @Nullable
     @Override
     public Category convert(CategoryDTO source) {
 
