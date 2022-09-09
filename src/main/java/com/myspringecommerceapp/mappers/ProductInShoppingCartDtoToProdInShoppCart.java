@@ -2,6 +2,7 @@ package com.myspringecommerceapp.mappers;
 
 
 import com.myspringecommerceapp.model.ProductInShoppingCart;
+import com.myspringecommerceapp.model.ShoppingCart;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
 import com.myspringecommerceapp.modelDTO.ProductInShoppingCartDTO;
 import lombok.Synchronized;
@@ -13,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class ProductInShoppingCartDtoToProdInShoppCart implements Converter<ProductInShoppingCartDTO, ProductInShoppingCart> {
 
     private final ProductDtoToProduct productDtoToProduct;
-    private final ShoppingCartDtoToShoppingCart shoppingCartDtoToShoppingCart;
+//    private final ShoppingCartDtoToShoppingCart shoppingCartDtoToShoppingCart;
 
-    public ProductInShoppingCartDtoToProdInShoppCart(ProductDtoToProduct productDtoToProduct, ShoppingCartDtoToShoppingCart shoppingCartDtoToShoppingCart) {
+
+    public ProductInShoppingCartDtoToProdInShoppCart(ProductDtoToProduct productDtoToProduct) {
         this.productDtoToProduct = productDtoToProduct;
-        this.shoppingCartDtoToShoppingCart = shoppingCartDtoToShoppingCart;
     }
 
     @Synchronized
@@ -31,7 +32,13 @@ public class ProductInShoppingCartDtoToProdInShoppCart implements Converter<Prod
         productInShoppingCart.setId(source.getId());
         productInShoppingCart.setProduct(productDtoToProduct.convert(source.getProduct()));
         productInShoppingCart.setQuantity(source.getQuantity());
-        productInShoppingCart.setShoppingCart(shoppingCartDtoToShoppingCart.convert(source.getShoppingCart()));
+
+        if(source.getShoppingCartId() != null){
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setId(source.getShoppingCartId());
+            productInShoppingCart.setShoppingCart(shoppingCart);
+            shoppingCart.getProductInShoppingCartList().add(productInShoppingCart);
+        }
 
         return productInShoppingCart;
     }

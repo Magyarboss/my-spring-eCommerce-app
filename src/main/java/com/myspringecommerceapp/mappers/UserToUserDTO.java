@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserToUserDTO implements Converter<User, UserDTO> {
 
-    private final BillToBillDTO billToBillDTO;
-    private final ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO;
-
-    public UserToUserDTO(BillToBillDTO billToBillDTO, ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO) {
-        this.billToBillDTO = billToBillDTO;
-        this.shoppingCartToShoppingCartDTO = shoppingCartToShoppingCartDTO;
-    }
+//    private final BillToBillDTO billToBillDTO;
+//    private final ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO;
+//
+//
+//    public UserToUserDTO(BillToBillDTO billToBillDTO) {
+//        this.billToBillDTO = billToBillDTO;
+//    }
 
     @Synchronized
     @Nullable
@@ -37,13 +37,15 @@ public class UserToUserDTO implements Converter<User, UserDTO> {
         userDTO.setEmail(source.getEmail());
         userDTO.setImage(source.getImage());
         userDTO.setUserType(source.getUserType());
-        userDTO.setShoppingCart(shoppingCartToShoppingCartDTO.convert(source.getShoppingCart()));
-
-        if(source.getBills() != null && source.getBills().size() > 0){
-            source.getBills().forEach(bill -> {
-                userDTO.getBills().add(billToBillDTO.convert(bill));
-            });
+        if(source.getShoppingCart() != null) {
+            userDTO.setShoppingCartId(source.getShoppingCart().getId());
         }
+
+//        if(source.getBills() != null && source.getBills().size() > 0){
+//            source.getBills().forEach(bill -> {
+//                userDTO.getBills().add(billToBillDTO.convert(bill));
+//            });
+//        }
 
         return userDTO;
     }

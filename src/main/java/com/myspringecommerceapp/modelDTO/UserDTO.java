@@ -19,6 +19,7 @@ import java.util.List;
 public class UserDTO {
 
     private Long id;
+    private Long shoppingCartId;
     @NotBlank
     private String firstName;
     @NotBlank
@@ -33,7 +34,6 @@ public class UserDTO {
     @NotBlank
     private UserType userType;
 
-    private ShoppingCartDTO shoppingCart;
-    private List<BillDTO> bills;
+
 
 }

@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 public class ProductInShoppingCartToProdInShoppCartDTO implements Converter<ProductInShoppingCart, ProductInShoppingCartDTO> {
 
     private final ProductToProductDTO productToProductDTO;
-    private final ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO;
+//    private final ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO;
 
-    public ProductInShoppingCartToProdInShoppCartDTO(ProductToProductDTO productToProductDTO, ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO) {
+
+    public ProductInShoppingCartToProdInShoppCartDTO(ProductToProductDTO productToProductDTO) {
         this.productToProductDTO = productToProductDTO;
-        this.shoppingCartToShoppingCartDTO = shoppingCartToShoppingCartDTO;
     }
 
     @Synchronized
@@ -31,7 +31,9 @@ public class ProductInShoppingCartToProdInShoppCartDTO implements Converter<Prod
         productInShoppingCartDTO.setId(source.getId());
         productInShoppingCartDTO.setProduct(productToProductDTO.convert(source.getProduct()));
         productInShoppingCartDTO.setQuantity(source.getQuantity());
-        productInShoppingCartDTO.setShoppingCart(shoppingCartToShoppingCartDTO.convert(source.getShoppingCart()));
+        if(source.getShoppingCart() != null){
+            productInShoppingCartDTO.setShoppingCartId(source.getShoppingCart().getId());
+        }
 
         return productInShoppingCartDTO;
     }

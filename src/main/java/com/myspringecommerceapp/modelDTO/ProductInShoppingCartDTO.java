@@ -10,8 +10,9 @@ import lombok.Setter;
 public class ProductInShoppingCartDTO {
 
     private Long id;
+    private Long shoppingCartId;
     private ProductDTO product;
     private int quantity;
-    private ShoppingCartDTO shoppingCart;
+
 
 }
