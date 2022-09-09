@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 public class UserToUserDTO implements Converter<User, UserDTO> {
 
     private final BillToBillDTO billToBillDTO;
+    private final ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO;
 
+    public UserToUserDTO(BillToBillDTO billToBillDTO, ShoppingCartToShoppingCartDTO shoppingCartToShoppingCartDTO) {
+        this.billToBillDTO = billToBillDTO;
+        this.shoppingCartToShoppingCartDTO = shoppingCartToShoppingCartDTO;
+    }
 
     @Synchronized
     @Nullable
@@ -32,7 +37,7 @@ public class UserToUserDTO implements Converter<User, UserDTO> {
         userDTO.setEmail(source.getEmail());
         userDTO.setImage(source.getImage());
         userDTO.setUserType(source.getUserType());
-        userDTO.setShoppingCart(source.getShoppingCart());
+        userDTO.setShoppingCart(shoppingCartToShoppingCartDTO.convert(source.getShoppingCart()));
 
         if(source.getBills() != null && source.getBills().size() > 0){
             source.getBills().forEach(bill -> {

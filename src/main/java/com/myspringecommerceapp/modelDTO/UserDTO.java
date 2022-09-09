@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+
 public class UserDTO {
 
     private Long id;
@@ -32,7 +33,7 @@ public class UserDTO {
     @NotBlank
     private UserType userType;
 
-    private ShoppingCart shoppingCart;
-    private List<Bill> bills;
+    private ShoppingCartDTO shoppingCart;
+    private List<BillDTO> bills;
 
 }
