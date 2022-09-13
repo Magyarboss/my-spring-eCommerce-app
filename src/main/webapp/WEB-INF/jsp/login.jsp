@@ -8,15 +8,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.myspringecommerceapp.modelDTO.*"%>
-<!DOCTYPE html>
+
 <html>
 <head>
 
-    <link href="./css/headers.css" rel="stylesheet">
+    <link href="/resources/css/headers.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-    <link href="./css/login-page.css" rel="stylesheet">
+    <link href="/resources/css/login-page.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>IT Accessories</title>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <form action="LoginServlet" class="signin-form" method="POST">
+                        <form action="/login" class="signin-form" method="POST">
                             <div class="form-group mt-3">
                                 <input id="username" name="username" type="text" class="form-control" required>
                                 <label class="form-control-placeholder" for="username">Korisničko ime</label>
@@ -106,11 +106,10 @@
 
 </div>
 
-<script src="./javascript/jquery.min.js"></script>
-<script src="./javascript/popper.js"></script>
-<script src="./javascript/bootstrap.min.js"></script>
-<script src="./javascript/main.js"></script>
+<script src="/resources/javascript/jquery.min.js"></script>
+<script src="/resources/javascript/popper.js"></script>
+<script src="/resources/javascript/bootstrap.min.js"></script>
+<script src="/resources/javascript/main.js"></script>
 
 </body>
-</html>
 </html>

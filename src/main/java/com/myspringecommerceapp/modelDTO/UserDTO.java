@@ -6,6 +6,7 @@ import com.myspringecommerceapp.model.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 
 public class UserDTO {
 

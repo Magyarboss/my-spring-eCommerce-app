@@ -24,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = new ArrayList<>();
         categoryRepository.findAll().forEach(categories::add);
 //        for(Category c : categories) System.out.println(c.getName());
-        for(Category c : categories) System.out.println("Category subcategories = " + c.getSubcategories().toString());
+//        for(Category c : categories) System.out.println("Category subcategories = " + c.getSubcategories().toString());
         return categories;
     }
 

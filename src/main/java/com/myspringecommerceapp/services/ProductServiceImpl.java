@@ -32,9 +32,9 @@ public class ProductServiceImpl implements ProductService {
         productRepository.findAll().forEach(product -> {
             productDTOList.add(productToProductDTO.convert(product));
         });
-        for(ProductDTO productDTO : productDTOList){
-            System.out.println("This is product DTO: "+ productDTO.toString());
-        }
+//        for(ProductDTO productDTO : productDTOList){
+//            System.out.println("This is product DTO: "+ productDTO.toString());
+//        }
         return productDTOList;
     }
 

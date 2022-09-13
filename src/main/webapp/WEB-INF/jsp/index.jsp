@@ -42,39 +42,39 @@
                 <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
             </form>
 
-            <c:if test="${loggedUser!=null}" >
+            <c:if test="${userDTO!=null}" >
                 <div  class="dropdown text-end mx-2">
                     <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <c:if test="${slikaprofila==null}">
-                            <img src="./slike/slikeprofila/blank-profile-picture-973460__340.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <c:if test="${useDTO.image==null}">
+                            <img src="/resources/images/profile-images/blank-profile-picture-973460__340.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </c:if>
-                        <c:if test="${slikaprofila!=null}">
-                            <img src="./slike/slikeprofila/${slikaprofila}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <c:if test="${useDTO.image!=null}">
+                            <img src="/resources/images/profile-images/${userDTO.image}" alt="mdo" width="32" height="32" class="rounded-circle">
                         </c:if>
-                            ${ime}
+                            ${userDTO.firstName}
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="mojprofil.jsp">Moj profil</a></li>
                         <li><a class="dropdown-item" href="PovijestKupnjeServlet">Moja povijest kupnja</a></li>
 
-                        <c:if test="${loggedUser=='Administrator'}" >
+                        <c:if test="${userDTO.userType=='ADMIN'}" >
                             <li><a class="dropdown-item" href="PovijestKupnjeAdminServlet">Povijest svih kupnja</a></li>
                         </c:if>
 
                         <li><a class="dropdown-item" href="#">Promjena lozinke</a></li>
 
-                        <c:if test="${loggedUser=='Administrator'}" >
+                        <c:if test="${userDTO.userType=='ADMIN'}" >
                             <li><a class="dropdown-item" href="dodavanjeproizvoda.jsp">Dodavanje proizvoda</a></li>
                         </c:if>
 
                         <li><a class="dropdown-item" href="#">Postavke</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="LogoutServlet">Odjavi se</a></li>
+                        <li><a class="dropdown-item" href="/logout">Odjavi se</a></li>
                     </ul>
                 </div>
             </c:if>
             <div class="text-end mx-2">
-                <c:if test="${loggedUser==null}" >
+                <c:if test="${userDTO==null}" >
                     <a href="/login" class="btn btn btn-success me-2">Prijava</a>
                     <a href="RegisterServlet" class="btn btn-success me-2">Registracija</a>
                 </c:if>

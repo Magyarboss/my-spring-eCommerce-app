@@ -3,6 +3,7 @@ package com.myspringecommerceapp.controller;
 
 import com.myspringecommerceapp.exceptions.NotFoundException;
 import com.myspringecommerceapp.modelDTO.ProductDTO;
+import com.myspringecommerceapp.modelDTO.UserDTO;
 import com.myspringecommerceapp.services.CategoryService;
 import com.myspringecommerceapp.services.ProductService;
 import com.myspringecommerceapp.services.SubcategoryService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,24 @@ public class CategoryController {
         this.productService = productService;
         this.subcategoryService = subcategoryService;
     }
+
+
+    @ModelAttribute
+    public void getUser(Model model, HttpServletRequest request){
+
+        UserDTO userDTO;
+        if(UserTransporter.isUserAvailable()) userDTO = UserTransporter.getUser();
+        else  userDTO = null;
+
+//        if(userDTO == null) System.out.println("Category Cont &&&&&&&&&&&&&&&&&&&&&&&&& userDTO IS NULL");
+//        else System.out.println(" Category Cont &&&&&&&&& it is not null user is: " + userDTO);
+        model.addAttribute("userDTO", userDTO);
+        model.addAttribute("pageHistory", ControllerMethods.addPageToHistory(request));
+        System.out.println("Category Controler!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+
+
 
     @RequestMapping("/{categoryId}")
     public String getCategoryProducts(@PathVariable Long categoryId, Model model, @RequestParam(defaultValue = "nameASC") String orderBy){
