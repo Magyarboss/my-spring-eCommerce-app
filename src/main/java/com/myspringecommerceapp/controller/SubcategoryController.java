@@ -25,11 +25,14 @@ public class SubcategoryController {
     private final CategoryService categoryService;
     private final ProductService productService;
     private final SubcategoryService subcategoryService;
+    private final UserTransporter userTransporter;
 
-    public SubcategoryController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService) {
+
+    public SubcategoryController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService, UserTransporter userTransporter) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.subcategoryService = subcategoryService;
+        this.userTransporter = userTransporter;
     }
 
 
@@ -37,7 +40,7 @@ public class SubcategoryController {
     public void getUser(Model model, HttpServletRequest request){
 
         UserDTO userDTO;
-        if(UserTransporter.isUserAvailable()) userDTO = UserTransporter.getUser();
+        if(UserTransporter.isUserAvailable()) userDTO = userTransporter.getUser();
         else  userDTO = null;
 
 //        if(userDTO == null) System.out.println("Subcat Cont &&&&&&&&&&&&&&&&&&&&&&&&& userDTO IS NULL");

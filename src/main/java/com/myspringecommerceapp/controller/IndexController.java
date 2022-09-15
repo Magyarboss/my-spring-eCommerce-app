@@ -24,19 +24,20 @@ public class IndexController {
 
     private final CategoryService categoryService;
     private final ProductService productService;
-    private final SubcategoryService subcategoryService;
+    private final UserTransporter userTransporter;
 
-    public IndexController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService) {
+
+    public IndexController(CategoryService categoryService, ProductService productService, UserTransporter userTransporter) {
         this.categoryService = categoryService;
         this.productService = productService;
-        this.subcategoryService = subcategoryService;
+        this.userTransporter = userTransporter;
     }
 
     @ModelAttribute
     public void getUser(Model model, HttpServletRequest request){
 
         UserDTO userDTO;
-        if(UserTransporter.isUserAvailable()) userDTO = UserTransporter.getUser();
+        if(UserTransporter.isUserAvailable()) userDTO = userTransporter.getUser();
         else  userDTO = null;
 
 //        if(userDTO == null) System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&& userDTO IS NULL");

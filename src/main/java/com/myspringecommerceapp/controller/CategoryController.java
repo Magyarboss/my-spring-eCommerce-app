@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -25,20 +24,19 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     private final ProductService productService;
-    private final SubcategoryService subcategoryService;
+    private final UserTransporter userTransporter;
 
-    public CategoryController(CategoryService categoryService, ProductService productService, SubcategoryService subcategoryService) {
+    public CategoryController(CategoryService categoryService, ProductService productService, UserTransporter userTransporter) {
         this.categoryService = categoryService;
         this.productService = productService;
-        this.subcategoryService = subcategoryService;
+        this.userTransporter = userTransporter;
     }
-
 
     @ModelAttribute
     public void getUser(Model model, HttpServletRequest request){
 
         UserDTO userDTO;
-        if(UserTransporter.isUserAvailable()) userDTO = UserTransporter.getUser();
+        if(UserTransporter.isUserAvailable()) userDTO = userTransporter.getUser();
         else  userDTO = null;
 
 //        if(userDTO == null) System.out.println("Category Cont &&&&&&&&&&&&&&&&&&&&&&&&& userDTO IS NULL");

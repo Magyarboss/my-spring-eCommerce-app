@@ -33,9 +33,9 @@ public class LoginController {
 
 
     @GetMapping
-    public String loginForm(Model model){
+    public String getLoginForm(Model model){
 //        model.addAttribute("user", User.builder().build());
-        return "login";
+        return "loginForm";
     }
 
 

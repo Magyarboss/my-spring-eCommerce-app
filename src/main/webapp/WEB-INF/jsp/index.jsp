@@ -45,16 +45,16 @@
             <c:if test="${userDTO!=null}" >
                 <div  class="dropdown text-end mx-2">
                     <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <c:if test="${useDTO.image==null}">
+                        <c:if test="${userDTO.image==null}">
                             <img src="/resources/images/profile-images/blank-profile-picture-973460__340.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </c:if>
-                        <c:if test="${useDTO.image!=null}">
-                            <img src="/resources/images/profile-images/${userDTO.image}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <c:if test="${userDTO.image!=null}">
+                            <img src="/user/${userDTO.username}/userImage" alt="mdo" width="32" height="32" class="rounded-circle">
                         </c:if>
                             ${userDTO.firstName}
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="mojprofil.jsp">Moj profil</a></li>
+                        <li><a class="dropdown-item" href="/user/${userDTO.username}/profile">Moj profil</a></li>
                         <li><a class="dropdown-item" href="PovijestKupnjeServlet">Moja povijest kupnja</a></li>
 
                         <c:if test="${userDTO.userType=='ADMIN'}" >

@@ -8,7 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>ERROR page not implemented yet</title>
+    <title>ERROR Not Found</title>
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>404 Not Found</h1>
+                <p> ${exception.getMessage()}</p>
+            </div>
+        </div>
+    </div>
 </head>
 <body>
 

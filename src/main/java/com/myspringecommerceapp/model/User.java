@@ -31,7 +31,6 @@ public class User extends Person{
 
 
     @Builder
-
     public User(Long id, String firstName, String lastName, String username, String password, String email, Byte[] image, UserType userType, ShoppingCart shoppingCart, List<Bill> bills) {
         super(id, firstName, lastName);
         this.username = username;

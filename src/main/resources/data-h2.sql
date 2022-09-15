@@ -87,4 +87,4 @@ INSERT INTO product (name, description, quantity_in_stock, price, subcategory_id
 INSERT INTO users (first_name, last_name, username, password, email, image, user_type) VALUES
     ('Pero', 'Perić', 'pero123', 'pero123123123', 'pero@gmail.com', 'download.jpg', 'CUSTOMER');
 INSERT INTO users (first_name, last_name, username, password, email, image, user_type) VALUES
-    ('Admin', null, 'admin', 'admin123123', 'admin@gmail.com', 'Rocky.jpg', 'ADMIN')
+    ('Admin', null, 'admin', 'admin123123', 'admin@gmail.com', null, 'ADMIN')

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Mozda staviti ovo kao Service???
+ * helping methods so when redirecting I can choose to redirect back to users last url or any url in past that he has been on
+ */
 public class ControllerMethods {
 
     protected static List<String> pageHistory = new ArrayList<>();

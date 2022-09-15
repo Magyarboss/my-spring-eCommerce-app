@@ -33,7 +33,7 @@ public class UserDtoToUser implements Converter<UserDTO, User> {
         user.setUsername(source.getUsername());
         user.setPassword(source.getPassword());
         user.setEmail(source.getEmail());
-        user.setImage(source.getImage());
+        user.setImage(source.getImage());  //John nije prenosio sa DTO image pa eventualno maknuti ovo ako nesto ne bude radilo ali za sada nek ostane posto ne vidim zasto ne bi to prenio
         user.setUserType(source.getUserType());
 
         if(source.getShoppingCartId() != null){

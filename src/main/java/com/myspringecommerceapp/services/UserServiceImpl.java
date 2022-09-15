@@ -1,5 +1,6 @@
 package com.myspringecommerceapp.services;
 
+import com.myspringecommerceapp.controller.UserTransporter;
 import com.myspringecommerceapp.exceptions.NotFoundException;
 import com.myspringecommerceapp.mappers.UserToUserDTO;
 import com.myspringecommerceapp.model.User;
@@ -32,4 +33,18 @@ public class UserServiceImpl implements UserService {
 
         return userToUserDTO.convert(user);
     }
+
+    @Override
+    public UserDTO findUserByUsername(String username) {
+        User user = userRepository.findUserByUsername(username);
+
+        if(user == null) {
+            throw new NotFoundException("User Not Found. For Username value: " + username );
+        }
+
+        return userToUserDTO.convert(user);
+    }
+
+
+
 }

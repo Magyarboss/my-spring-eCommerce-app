@@ -22,18 +22,12 @@ public class LogoutController {
     }
 
 
-
     @GetMapping
-    private String processLoginForm(UserDTO userDTO, Model model, HttpServletRequest request){
+    private String processLogout(){
 
-        // TODO check if username and password are correct bla bla bla if not show some error if yes redirect:
-
-        System.out.println("------------- Logout controler: userDTO : " + userDTO.toString() + "usertrasport = " + UserTransporter.getUser());
-        model.addAttribute("userDTO", userDTO);
         UserTransporter.deleteUserFromSession();
-        System.out.println("------------- Logout controler: deleted userDTO : " + userDTO);
 
-        return ControllerMethods.getPreviousPageByRequestAndRedirect(request).orElse("/");
-    }
+        return "redirect:/";           //ControllerMethods.getPreviousPageByRequestAndRedirect(request).orElse("/"); ovo je ako se zelimo vratiti na proslju stranicu
+    }                                                               // ali nije recomended jer se odjavljujemo i imat cemo razlicitih errora
 
 }

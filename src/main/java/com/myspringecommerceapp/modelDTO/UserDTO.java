@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -32,6 +33,7 @@ public class UserDTO {
     private String password;
     @Email
     private String email;
+    @Nullable
     private Byte[] image;
     @NotBlank
     private UserType userType;
