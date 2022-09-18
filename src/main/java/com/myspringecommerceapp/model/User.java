@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 @Entity
 @Table(name = "users")  //izbacuje error ako se tablica zove "user" iz nekog razloga

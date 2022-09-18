@@ -39,6 +39,12 @@
                             </div>
                         </div>
 
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <p style="color: #01d28e;"  class="text-center">${successfulRegist}</p>
+                            </div>
+                        </div>
+
                         <form action="/login" class="signin-form" method="POST">
                             <div class="form-group mt-3">
                                 <input id="username" name="username" type="text" class="form-control" required>

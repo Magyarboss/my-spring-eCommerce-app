@@ -35,7 +35,6 @@ public class UserDTO {
     private String email;
     @Nullable
     private Byte[] image;
-    @NotBlank
     private UserType userType;
 
 

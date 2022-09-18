@@ -34,6 +34,10 @@ public class LoginController {
 
     @GetMapping
     public String getLoginForm(Model model){
+        //testing if there is already logged-in user and redirect to home page if there is
+        if(UserTransporter.isUserAvailable()) {
+            return "redirect:/";
+        }
 //        model.addAttribute("user", User.builder().build());
         return "loginForm";
     }
@@ -44,12 +48,14 @@ public class LoginController {
 
         // TODO check if username and password are correct bla bla bla if not show some error if yes redirect:
         UserDTO userDTO = userService.findUserByUsernameAndPassword(username, password );
-        System.out.println("------------- Login controler: userDTO : " + userDTO.toString());
         model.addAttribute("userDTO", userDTO);
         UserTransporter.setUser(userDTO);
 
-        System.out.println("ttttttttttttttttest sizeee" + ControllerMethods.pageHistory.size());
-        System.out.println("tttttt content: " + ControllerMethods.pageHistory);
+        //testing if history of requests has at least 1 request in history then just redirect to home page..
+        // (so it breaks the loop of going back to login.jsp)
+        if(ControllerMethods.pageHistory.size() < 2) {
+            return ControllerMethods.getPreviousPageByRequestAndRedirect(request).orElse("/");
+        }
 
         return ControllerMethods.pageHistory.get(ControllerMethods.pageHistory.size()-2);
     }

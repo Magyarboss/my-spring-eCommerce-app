@@ -76,15 +76,15 @@
             <div class="text-end mx-2">
                 <c:if test="${userDTO==null}" >
                     <a href="/login" class="btn btn btn-success me-2">Prijava</a>
-                    <a href="RegisterServlet" class="btn btn-success me-2">Registracija</a>
+                    <a href="/registration" class="btn btn-success me-2">Registracija</a>
                 </c:if>
 
                 <div  class="float-end mx-2">
                     <c:if test="${kosarica==null}">
-                        <a href="PrikazKosariceServlet" class="btn btn-warning"> Moja košarica <i class="bi bi-cart4"></i> </a>
+                        <a href="/shoppingCart" class="btn btn-warning"> Moja košarica <i class="bi bi-cart4"></i> </a>
                     </c:if>
                     <c:if test="${kosarica!=null}">
-                        <a href="PrikazKosariceServlet" class="btn btn-warning"> Moja košarica <i class="bi bi-cart4"></i> (${kosarica.size()}) </a>
+                        <a href="/shoppingCart" class="btn btn-warning"> Moja košarica <i class="bi bi-cart4"></i> (${kosarica.size()}) </a>
                     </c:if>
                 </div>
             </div>
@@ -241,7 +241,7 @@
                                     <h5 class="card-title">${p.name}</h5>
                                     <p class="card-text">${p.description}</p>
                                     <h5 class="card-title"><fmt:formatNumber value="${p.price}" minFractionDigits="2" maxFractionDigits="2" />Kn</h5>
-                                    <form action="DodajUKosaricuServlet" method="post">
+                                    <form action="/shoppingCart" method="post">
                                         <input type="hidden" name="id" value="${p.id}" />
                                         <input type="hidden" name="naziv" value="${p.name}" />
                                         <input type="hidden" name="opis" value="${p.description}" />

@@ -9,4 +9,10 @@ public interface UserService {
 
     UserDTO findUserByUsername(String username);
 
+    UserDTO readUserByUsername(String username);
+
+    UserDTO readUserByEmail(String email);
+
+    UserDTO saveUserDTO(UserDTO userDTO);
+
 }

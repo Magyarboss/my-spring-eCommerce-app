@@ -1,25 +1,27 @@
 package com.myspringecommerceapp.services;
 
-import com.myspringecommerceapp.controller.UserTransporter;
 import com.myspringecommerceapp.exceptions.NotFoundException;
+import com.myspringecommerceapp.mappers.UserDtoToUser;
 import com.myspringecommerceapp.mappers.UserToUserDTO;
 import com.myspringecommerceapp.model.User;
 import com.myspringecommerceapp.modelDTO.UserDTO;
 import com.myspringecommerceapp.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserToUserDTO userToUserDTO;
+    private final UserDtoToUser userDtoToUser;
 
 
-    public UserServiceImpl(UserRepository userRepository, UserToUserDTO userToUserDTO) {
+    public UserServiceImpl(UserRepository userRepository, UserToUserDTO userToUserDTO, UserDtoToUser userDtoToUser) {
         this.userRepository = userRepository;
         this.userToUserDTO = userToUserDTO;
+        this.userDtoToUser = userDtoToUser;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUsernameAndPassword(username, password);
 
         if(user == null) {
-            throw new NotFoundException("User Not Found. For Username value: " + username );
+            throw new NotFoundException("Username or/and password is not correct! ");
         }
 
         return userToUserDTO.convert(user);
@@ -45,6 +47,27 @@ public class UserServiceImpl implements UserService {
         return userToUserDTO.convert(user);
     }
 
+    @Override
+    public UserDTO readUserByUsername(String username) {
+        User user = userRepository.readUserByUsername(username);
+        return userToUserDTO.convert(user);
+    }
 
+    @Override
+    public UserDTO readUserByEmail(String email) {
+        User user = userRepository.readUserByEmail(email);
+        return userToUserDTO.convert(user);
+    }
 
+    @Override
+    public UserDTO saveUserDTO(UserDTO userDTO) {
+
+        User detachedUser = userDtoToUser.convert(userDTO);
+
+        User savedUser = userRepository.save(detachedUser);
+        log.debug("------------------------Saved UserId: "+ savedUser.getId());
+        System.out.println("------------------------Saved UserId: "+ savedUser.getId());
+
+        return userToUserDTO.convert(savedUser);
+    }
 }
